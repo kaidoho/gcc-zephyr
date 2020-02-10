@@ -158,6 +158,11 @@ case "${target}" in
 	XCFLAGS="${configure_tgt_pre_target_cpu_XCFLAGS}"
 	config_path="rtems"
 	;;
+	
+  *-*-zephyr*)
+	XCFLAGS="${configure_tgt_pre_target_cpu_XCFLAGS}"
+	config_path="zephyr"
+	;;
 
   *-*-elf*)
 	# ??? No target OS.  We could be targeting bare-metal kernel-mode,

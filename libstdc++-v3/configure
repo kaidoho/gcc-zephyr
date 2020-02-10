@@ -20868,7 +20868,7 @@ $as_echo "$glibcxx_glibc217" >&6; }
         ac_has_nanosleep=yes
         ac_has_sched_yield=yes
         ;;
-      freebsd*|netbsd*|dragonfly*|rtems*)
+      freebsd*|netbsd*|dragonfly*|rtems*|zephyr*)
         ac_has_clock_monotonic=yes
         ac_has_clock_realtime=yes
         ac_has_nanosleep=yes
@@ -66806,7 +66806,7 @@ $as_echo "$ac_ld_relro" >&6; }
     $as_echo "#define HAVE_SINHL 1" >>confdefs.h
 
     ;;
-  *-rtems*)
+  *-rtems*|*-zephyr*)
 
   # All these tests are for C++; save the language and the compiler flags.
   # The CXXFLAGS thing is suspicious, but based on similar bits previously

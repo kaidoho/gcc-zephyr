@@ -321,6 +321,10 @@ case ${host} in
 *-*-vxworks*)
   tmake_file=t-vxworks
   ;;
+*-*-zephyr*)
+  tmake_file="$tmake_file t-zephyr"
+  extra_parts="crtbegin.o crtend.o"
+  ;;  
 *-*-elf)
   extra_parts="crtbegin.o crtend.o"
   ;;
@@ -343,7 +347,7 @@ i[34567]86-*-cygwin* | x86_64-*-cygwin*)
 esac
 
 case ${host} in
-aarch64*-*-elf | aarch64*-*-rtems*)
+aarch64*-*-elf | aarch64*-*-rtems* | aarch64*-*-zephyr*)
 	extra_parts="$extra_parts crtbegin.o crtend.o crti.o crtn.o"
 	extra_parts="$extra_parts crtfastmath.o"
 	tmake_file="${tmake_file} ${cpu_type}/t-aarch64"
@@ -458,11 +462,11 @@ arm*-*-phoenix*)
 	extra_parts="crtbegin.o crtend.o crti.o crtn.o"
 	unwind_header=config/arm/unwind-arm.h
 	;;
-arm*-*-eabi* | arm*-*-symbianelf* | arm*-*-rtems*)
+arm*-*-eabi* | arm*-*-symbianelf* | arm*-*-rtems* | arm*-*-zephyr*)
 	tmake_file="${tmake_file} arm/t-arm arm/t-elf t-fixedpoint-gnu-prefix"
 	tm_file="$tm_file arm/bpabi-lib.h"
 	case ${host} in
-	arm*-*-eabi* | arm*-*-rtems*)
+	arm*-*-eabi* | arm*-*-rtems* | arm*-*-zephyr*)
 	  tmake_file="${tmake_file} arm/t-bpabi t-crtfm"
 	  extra_parts="crtbegin.o crtend.o crti.o crtn.o"
 	  ;;
@@ -632,10 +636,10 @@ i[34567]86-*-elfiamcu)
 i[34567]86-*-elf*)
 	tmake_file="$tmake_file i386/t-crtstuff t-crtstuff-pic t-libgcc-pic"
 	;;
-x86_64-*-elf* | x86_64-*-rtems*)
+x86_64-*-elf* | x86_64-*-rtems* | x86_64-*-zephyr*)
 	tmake_file="$tmake_file i386/t-crtstuff t-crtstuff-pic t-libgcc-pic"
 	case ${host} in
-	  x86_64-*-rtems*)
+	  x86_64-*-rtems* | x86_64-*-zephyr*)
 	    extra_parts="$extra_parts crti.o crtn.o"
 	    ;;
 	esac
@@ -699,7 +703,7 @@ i[34567]86-*-nto-qnx*)
 	tmake_file="$tmake_file i386/t-nto t-libgcc-pic"
 	extra_parts=crtbegin.o
 	;;
-i[34567]86-*-rtems*)
+i[34567]86-*-rtems* | i[34567]86-*-zephyr*)
 	tmake_file="$tmake_file i386/t-crtstuff t-softfp-sfdftf i386/32/t-softfp i386/t-softfp t-softfp"
 	extra_parts="$extra_parts crti.o crtn.o"
 	;;
@@ -904,7 +908,7 @@ microblaze*-*-elf)
 	tmake_file="${tmake_file} microblaze/t-microblaze t-fdpbit"
 	extra_parts="$extra_parts crtbeginS.o crtendS.o crtbeginT.o crti.o crtn.o"
 	;;
-microblaze*-*-rtems*)
+microblaze*-*-rtems* | microblaze*-*-zephyr*)
 	tmake_file="${tmake_file} microblaze/t-microblaze t-fdpbit"
 	extra_parts="$extra_parts crtbeginS.o crtendS.o crtbeginT.o crti.o crtn.o"
 	;;
@@ -978,7 +982,7 @@ mips64orion-*-elf* | mips64orionel-*-elf*)
 	tmake_file="$tmake_file mips/t-elf mips/t-crtstuff mips/t-mips16"
 	extra_parts="$extra_parts crti.o crtn.o"
 	;;
-mips*-*-rtems*)
+mips*-*-rtems* | mips*-*-zephyr*)
 	tmake_file="$tmake_file mips/t-elf mips/t-crtstuff mips/t-mips16"
 	extra_parts="$extra_parts crti.o crtn.o"
 	;;
@@ -1304,7 +1308,7 @@ sparc-*-linux*)		# SPARC's running GNU/Linux, libc6
 	extra_parts="$extra_parts crtfastmath.o"
 	md_unwind_header=sparc/linux-unwind.h
 	;;
-sparc-*-rtems*)
+sparc-*-rtems* | sparc-*-zephyr*)
 	tmake_file="$tmake_file sparc/t-elf sparc/t-softmul t-crtfm t-fdpbit"
 	extra_parts="$extra_parts crti.o crtn.o crtfastmath.o"
 	;;
@@ -1317,7 +1321,7 @@ sparc64-*-elf*)
 	tmake_file="${tmake_file} t-crtfm"
 	extra_parts="$extra_parts crti.o crtn.o crtfastmath.o"
 	;;
-sparc64-*-rtems*)
+sparc64-*-rtems* | sparc64-*-zephyr*)
 	tmake_file="$tmake_file t-crtfm"
 	extra_parts="$extra_parts crti.o crtn.o crtfastmath.o"
 	;;
@@ -1445,7 +1449,7 @@ i[34567]86-*-linux* | x86_64-*-linux* | \
 esac
 
 case ${host} in
-i[34567]86-*-elfiamcu | i[34567]86-*-rtems*)
+i[34567]86-*-elfiamcu | i[34567]86-*-rtems* | i[34567]86-*-zephyr*)
 	# These use soft-fp for SFmode and DFmode, not just TFmode.
 	;;
 i[34567]86-*-* | x86_64-*-*)

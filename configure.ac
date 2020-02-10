@@ -742,6 +742,9 @@ case "${target}" in
   *-*-vxworks*)
     noconfigdirs="$noconfigdirs target-libffi"
     ;;
+  *-*-zephyr*)
+    noconfigdirs="$noconfigdirs target-libffi"
+    ;;
   aarch64*-*-freebsd*)
     noconfigdirs="$noconfigdirs target-libffi"
     ;;
@@ -987,6 +990,9 @@ case "${target}" in
     noconfigdirs="$noconfigdirs target-rda"
     ;;
   *-*-vxworks*)
+    ;;
+  *-*-zephyr*)
+    noconfigdirs="$noconfigdirs target-libgloss"
     ;;
   alpha*-dec-osf*)
     # ld works, but does not support shared libraries.

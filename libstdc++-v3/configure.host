@@ -318,6 +318,10 @@ case "${host_os}" in
   vxworks)
     os_include_dir="os/vxworks"
     ;;
+  zephyr*)
+    # Use libatomic if necessary and avoid libstdc++ specific atomicity support
+    atomicity_dir="cpu/generic/atomicity_builtins"
+    ;;
   *)
     os_include_dir="os/generic"
     ;;

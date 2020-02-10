@@ -245,7 +245,7 @@ case "${host}" in
     AC_DEFINE(HAVE_SINHF)
     AC_DEFINE(HAVE_SINHL)
     ;;
-  *-rtems*)
+  *-rtems* | *-zephyr*)
     GLIBCXX_CHECK_COMPILER_FEATURES
     GLIBCXX_CHECK_LINKER_FEATURES
     GLIBCXX_CHECK_MATH_SUPPORT
